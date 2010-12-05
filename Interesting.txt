@@ -1,0 +1,30 @@
+HepTH Most Cited Papers (Highest In-Degree)
+9408099 with 1006 citations
+9906064 with 1032 citations
+9503124 with 1114 citations
+9908142 with 1144 citations
+9510017 with 1155 citations
+9610043 with 1199 citations
+9407087 with 1299 citations
+9802109 with 1641 citations
+9802150 with 1775 citations
+9711200 with 2414 citations
+
+HepPH Most Cited Papers (Highest In-Degree)
+9807344 with 503 citations
+9606399 with 542 citations
+9512380 with 550 citations
+9407339 with 557 citations
+9804398 with 616 citations
+9803315 with 846 citations
+
+Patents Most Cited Patents (Highest In-Degree)
+4683202 with 605 citations
+4459600 with 613 citations
+4683195 with 630 citations
+4313124 with 633 citations
+4558333 with 654 citations
+4345262 with 658 citations
+4740796 with 678 citations
+4463359 with 716 citations
+4723129 with 779 citations

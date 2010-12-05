@@ -1,0 +1,25 @@
+Iterate Through All Edges
+
+/*
+//Iterate Through All the Edges
+for(TNGraph::TEdgeI e = g->BegEI(); e != g->EndEI(); e++){
+	printf("%d %d\n", e.GetDstNId(), e.GetSrcNId());
+}
+*/
+
+
+Creating a Random Graph
+
+/*for(int i=0;i<10;i++){
+	g->AddNode();
+}
+
+for(int i=0;i<10;i++){
+	const int n1 = g->GetRndNId();
+	const int n2 = g->GetRndNId();
+	g->AddEdge(n1, n2);
+}
+
+g->Dump();*/
+
+http://reference.wolfram.com/mathematica/ref/FindFit.html

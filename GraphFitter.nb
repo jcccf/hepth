@@ -1,0 +1,263 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      9860,        254]
+NotebookOptionsPosition[      9561,        240]
+NotebookOutlinePosition[      9907,        255]
+CellTagsIndexPosition[      9864,        252]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"toFixedWidth", "[", 
+      RowBox[{"n_Integer", ",", "width_Integer"}], "]"}], ":=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"PadLeft", "[", 
+       RowBox[{
+        RowBox[{"Characters", "[", 
+         RowBox[{"ToString", "[", "n", "]"}], "]"}], ",", "width", ",", 
+        "\"\<0\>\""}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"toNumberedFileName", "[", "n_Integer", "]"}], ":=", 
+     RowBox[{"ToString", "@", 
+      RowBox[{"StringForm", "[", 
+       RowBox[{"\"\<``\>\"", ",", 
+        RowBox[{"toFixedWidth", "[", 
+         RowBox[{"n", ",", "2"}], "]"}]}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"SetDirectory", "[", 
+       RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"fileName", " ", "=", " ", 
+       RowBox[{"\"\<dc_k_sl_1000_\>\"", "<>", 
+        RowBox[{"toNumberedFileName", "[", "i", "]"}], "<>", 
+        "\"\<.txt\>\""}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"data", " ", "=", " ", 
+       RowBox[{"ReadList", "[", 
+        RowBox[{"fileName", ",", " ", "Number", ",", " ", 
+         RowBox[{"RecordLists", "\[Rule]", "True"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"data", " ", "=", " ", 
+         RowBox[{"Append", "[", 
+          RowBox[{"data", ",", 
+           RowBox[{"{", 
+            RowBox[{"0.0001", ",", "0.0001"}], "}"}]}], "]"}]}], ";"}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"para", "=", 
+       RowBox[{"Fit", "[", 
+        RowBox[{"data", ",", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"1", "/", "x"}], ",", 
+           RowBox[{"x", "^", 
+            RowBox[{"(", 
+             RowBox[{"1", "/", "2"}], ")"}]}], ",", 
+           SqrtBox["x"]}], "}"}], ",", "x"}], "]"}]}], ";", 
+      RowBox[{"p1", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Show", "[", 
+          RowBox[{
+           RowBox[{"ListPlot", "[", 
+            RowBox[{"data", ",", 
+             RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+             RowBox[{"PlotRange", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}], ",", 
+           RowBox[{"Plot", "[", 
+            RowBox[{
+             RowBox[{"{", "para", "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"x", ",", "0", ",", "1000"}], "}"}], ",", 
+             RowBox[{"PlotStyle", "\[Rule]", "Black"}], ",", 
+             RowBox[{"PlotRange", "\[Rule]", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]}], "]"}], 
+         "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{"Plot", " ", "Residual", " ", "Graph"}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "u"}], "}"}]}], " ", "=", " ", 
+        RowBox[{"Transpose", "[", "data", "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"modelf", " ", "=", " ", 
+       RowBox[{"Function", "[", 
+        RowBox[{
+         RowBox[{"{", "x", "}"}], ",", " ", 
+         RowBox[{"Evaluate", "[", "para", "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"residuals", " ", "=", " ", 
+       RowBox[{"u", " ", "-", " ", 
+        RowBox[{"Map", "[", 
+         RowBox[{"modelf", ",", "t"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"p2", " ", "=", " ", 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"residuals", ",", 
+         RowBox[{"Filling", "\[Rule]", "Axis"}], ",", 
+         RowBox[{"DataRange", "\[Rule]", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Min", "[", "t", "]"}], ",", 
+            RowBox[{"Max", "[", "t", "]"}]}], "}"}]}]}], "]"}]}], ";"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Export", " ", "Equation", " ", "and", " ", "Graphs"}], " ", 
+      "*)"}], 
+     RowBox[{"(*", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Export", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringTake", "[", 
+           RowBox[{"fileName", ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", 
+              RowBox[{"-", "5"}]}], "}"}]}], "]"}], "<>", 
+          "\"\<_fit.png\>\""}], ",", "p1"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringTake", "[", 
+           RowBox[{"fileName", ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", 
+              RowBox[{"-", "5"}]}], "}"}]}], "]"}], "<>", 
+          "\"\<_res.png\>\""}], ",", "p2"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Export", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"StringTake", "[", 
+           RowBox[{"fileName", ",", 
+            RowBox[{"{", 
+             RowBox[{"1", ",", 
+              RowBox[{"-", "5"}]}], "}"}]}], "]"}], "<>", 
+          "\"\<_rlt.txt\>\""}], ",", " ", "para"}], "]"}]}], "*)"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1"}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.495744247813079*^9, 3.495744255788535*^9}, {
+   3.495744360616531*^9, 3.4957443607955413`*^9}, {3.495744546407158*^9, 
+   3.495744546777179*^9}, {3.4957466751159124`*^9, 3.4957466999113307`*^9}, {
+   3.4957467831930943`*^9, 3.495746804558316*^9}, {3.495746846460713*^9, 
+   3.495746849363879*^9}, {3.495746885762961*^9, 3.495746977220192*^9}, {
+   3.495747045328088*^9, 3.49574721181861*^9}, {3.4957472485887136`*^9, 
+   3.495747312329359*^9}, {3.495747353497714*^9, 3.495747378010116*^9}, {
+   3.4957523130213823`*^9, 3.4957524049266396`*^9}, {3.495752457254632*^9, 
+   3.4957526558849936`*^9}, {3.4957526909419985`*^9, 3.495752727052064*^9}, {
+   3.4957528151050997`*^9, 3.4957528158121405`*^9}, {3.495752888617305*^9, 
+   3.495752916282887*^9}, {3.4957530005717077`*^9, 3.4957530069420724`*^9}, {
+   3.4957532153709936`*^9, 3.4957532448076773`*^9}, {3.4957532892552195`*^9, 
+   3.495753461674082*^9}, {3.495753540941615*^9, 3.4957536146868334`*^9}, {
+   3.4957536671198325`*^9, 3.4957537456803255`*^9}, {3.4957549802389383`*^9, 
+   3.4957549820030394`*^9}, {3.4957550345960474`*^9, 3.495755114866639*^9}, {
+   3.4957551506796875`*^9, 3.4957551837565794`*^9}, {3.4957552509154205`*^9, 
+   3.4957553199763703`*^9}, {3.4957553710772934`*^9, 
+   3.4957554034371443`*^9}, {3.4957554427213907`*^9, 
+   3.4957554828656874`*^9}, {3.495755545002241*^9, 3.4957555640133286`*^9}, {
+   3.495755605260688*^9, 3.4957557108357267`*^9}, {3.4957557881341476`*^9, 
+   3.4957558356198635`*^9}, {3.495755895303277*^9, 3.495755937283678*^9}, {
+   3.4957560317090793`*^9, 3.4957560319700937`*^9}, {3.4957560674511237`*^9, 
+   3.4957560908964643`*^9}, 3.4957561313887806`*^9, {3.4957561759633303`*^9, 
+   3.495756254825841*^9}, {3.4957572216411395`*^9, 3.495757221897154*^9}, {
+   3.4969383461851273`*^9, 3.4969383464761443`*^9}, {3.4969391563854685`*^9, 
+   3.4969391992279186`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{"model", "=", 
+    RowBox[{"1", "+", 
+     RowBox[{"1", "/", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"a", " ", "x"}], "+", "b"}], ")"}]}], "+", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{"a", " ", "x"}], "+", "b"}], "]"}]}]}], ";", "\n", 
+   RowBox[{"fit", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"FindFit", "[", 
+       RowBox[{"data", ",", "model", ",", 
+        RowBox[{"{", 
+         RowBox[{"a", ",", "b"}], "}"}], ",", "x"}], "]"}], "\n", "modelf"}], 
+     "=", 
+     RowBox[{
+      RowBox[{"Function", "[", 
+       RowBox[{
+        RowBox[{"{", "x", "}"}], ",", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{"model", "/.", "fit"}], "]"}]}], "]"}], "\n", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"modelf", "[", "x", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "1", ",", "100"}], "}"}], ",", 
+        RowBox[{"Epilog", "\[Rule]", 
+         RowBox[{"Map", "[", 
+          RowBox[{"Point", ",", "data"}], "]"}]}]}], "]"}], "\n", 
+      RowBox[{"Show", "[", 
+       RowBox[{
+        RowBox[{"ListPlot", "[", 
+         RowBox[{"data", ",", 
+          RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}], ",", 
+        RowBox[{"Plot", "[", 
+         RowBox[{
+          RowBox[{"modelf", "[", "x", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", "100"}], "}"}], ",", 
+          RowBox[{"PlotStyle", "\[Rule]", "Black"}], ",", 
+          RowBox[{"PlotRange", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "1"}], "}"}]}]}], "]"}]}], "]"}]}]}]}]}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.495753764228387*^9, 3.49575376708755*^9}}]
+},
+WindowSize->{607, 637},
+WindowMargins->{{Automatic, 330}, {57, Automatic}},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 7182, 164, 573, "Input"],
+Cell[7730, 186, 1827, 52, 132, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
